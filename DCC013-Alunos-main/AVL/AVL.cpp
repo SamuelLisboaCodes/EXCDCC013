@@ -1,78 +1,38 @@
-#include <iostream>
 #include "AVL.h"
-#include "NoAVL.h"
-#include "NoLSE.h"
-
+#include <iostream>
 using namespace std;
 
-AVL::AVL()
-{
-	this->raiz = NULL;
+AVL::AVL() {
+    raiz = nullptr;
 }
 
-AVL::~AVL()
-{
-	delete this->raiz;
+AVL::~AVL() {
+    // Destruir todos os nós da árvore (recursivamente, se quiser adicionar)
 }
 
-bool AVL::vazia()
-{
-	return this->raiz == NULL;
+void AVL::inserir(int valor) {
+    if (raiz)
+        raiz = raiz->insere(raiz, valor);
+    else
+        raiz = new NoAVL(valor);
 }
 
-void AVL::insere(int valor)
-{
-	if (this->vazia())
-		this->raiz = new NoAVL(valor);
-	else
-		this->raiz = this->raiz->insere(this->raiz, valor);
+void AVL::remover(int valor) {
+    if (raiz)
+        raiz = raiz->remove(raiz, valor);
 }
 
-NoAVL* AVL::busca(int valor)
-{
-	if (this->vazia())
-		return NULL;
-	return this->raiz->busca(valor);
+void AVL::imprimir() {
+    if (raiz)
+        raiz->imprimeVisualizacao(0);
+    else
+        cout << "Árvore vazia." << endl;
 }
 
-void AVL::remove(int valor)
-{
-	if (!this->vazia())
-		this->raiz = this->raiz->remove(this->raiz, valor);
-}
-
-void AVL::imprimeEmLargura()
-{
-	if (!this->vazia())
-	{
-		NoLSE* lista = new NoLSE(this->raiz);
-		for (NoLSE* p = lista; p != NULL; p = p->getProx())
-		{
-			cout << p->getNo()->getValor() << ", ";
-			p->insere(p->getNo()->getEsq());
-			p->insere(p->getNo()->getDir());
-		}
-		delete lista;
-	}
-	cout << "\b\b  " << endl;
-}
-
-void AVL::imprimeOrdemCrescente()
-{
-	if (!this->vazia())
-		this->raiz->imprimeOrdemCrescente();
-	cout << "\b\b  " << endl;
-}
-
-void AVL::imprimeVisualizacao()
-{
-	if (!this->vazia())
-		this->raiz->imprimeVisualizacao(0);
-}
-
-void AVL::destroiArvore()
-{
-	NoAVL* r = this->raiz;
-	delete r;
-	this->raiz = NULL;
+void AVL::imprimirOrdem() {
+    if (raiz)
+        raiz->imprimeOrdemCrescente();
+    else
+        cout << "Árvore vazia." << endl;
+    cout << endl;
 }
