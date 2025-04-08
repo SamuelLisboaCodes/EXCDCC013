@@ -3,24 +3,18 @@
 
 #include "NoAVL.h"
 
-class AVL
-{
-	private:
+class AVL {
+private:
+    NoAVL* raiz;
 
-		NoAVL* raiz;
+public:
+    AVL();
+    ~AVL();
 
-	public:
-
-		AVL();
-		~AVL();
-		bool vazia();
-		void insere(int valor);
-		NoAVL* busca(int valor);
-		void remove(int valor);
-		void imprimeEmLargura();
-		void imprimeOrdemCrescente();
-		void imprimeVisualizacao();
-		void destroiArvore();
+    void inserir(int valor);
+    void remover(int valor);
+    void imprimir();
+    void imprimirOrdem();
 };
 
 #endif
