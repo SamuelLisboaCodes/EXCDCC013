@@ -1,38 +1,39 @@
 #ifndef NOAVL_H
 #define NOAVL_H
 
-class NoAVL
-{
-	private:
+#include <iostream>
+using namespace std;
 
-		int valor;
-		int altura;
-		NoAVL* esq;
-		NoAVL* dir;
+class NoAVL {
+private:
+    int valor;
+    int altura;
+    NoAVL* esq;
+    NoAVL* dir;
 
-	public:
+    NoAVL* rotacaoDireita(NoAVL* y);
+    NoAVL* rotacaoEsquerda(NoAVL* x);
+    NoAVL* corrige(NoAVL* no);
+    int max(int a, int b);
 
-		// funções presentes na ABB
-		NoAVL(int valor);
-		~NoAVL();
-		int getValor();
-		NoAVL* getEsq();
-		NoAVL* getDir();
-		void setValor(int valor);
-		void setEsq(NoAVL* no);
-		void setDir(NoAVL* no);
-		NoAVL* busca(int valor);
-		void imprimeOrdemCrescente();
-		void imprimeVisualizacao(int n);
+public:
+    NoAVL(int v);
+    ~NoAVL();
 
-		// funções novas/atualizadas
-		void atualizaAltura();
-		int getFB();
-		NoAVL* rotEsq(NoAVL* no);
-		NoAVL* rotDir(NoAVL* no);
-		NoAVL* corrige(NoAVL* no);
-		NoAVL* insere(NoAVL* no, int valor);
-		NoAVL* remove(NoAVL* no, int valor);
+    int getValor();
+    NoAVL* getEsq();
+    NoAVL* getDir();
+
+    int getAltura(NoAVL* no);
+    int getBalanceamento(NoAVL* no);
+    void atualizaAltura();
+
+    NoAVL* insere(NoAVL* no, int valor);
+    NoAVL* remove(NoAVL* no, int valor);
+    NoAVL* menorValor(NoAVL* no);
+    NoAVL* busca(int valor);
+    void imprimeVisualizacao(int nivel);
+    void imprimeOrdemCrescente();
 };
 
 #endif
